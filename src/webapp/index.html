@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!--last modified on Monday, January 18, 1999 11:29 PM -->
+<HTML>
+
+<HEAD>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html;CHARSET=iso-8859-1">
+    <META NAME="GENERATOR" Content="Visual Page 1.1a for Windows">
+    <META NAME="Author" Content="Linda Oxnard">
+    <TITLE>A* Demonstraton222</TITLE>
+</HEAD>
+
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF">
+
+<H1 ALIGN="CENTER">A* Demonstration</H1>
+<CENTER>
+    <P>
+        <APPLET codebase="http://localhost:8080/astar/" CODE="AStarApplet.class" WIDTH="612" HEIGHT="482"
+                ALIGN="MIDDLE">
+        </APPLET>
+        <IMG SRC="key.gif" WIDTH="155" HEIGHT="272" ALIGN="MIDDLE" BORDER="0"></P>
+</CENTER>
+<P ALIGN="CENTER"><I>Applet by James Macgill</I></P>
+<P>
+<H2><I></I></H2>
+<H2>Instructions</H2>
+<P>This is a simple interactive implementation of the A* path finding algorithm.</P>
+<H3>To test:</H3>
+
+<UL>
+    <LI>Hit the <B>go </B>button.
+    <LI>Watch as the algorithm tries to find a route from the green dot to the red one.
+</UL>
+
+<H3>To load predefined maps:</H3>
+
+<UL>
+    <LI>Choose a <B>.grd</B> file from the <B>Load Map :</B> menu.
+    <LI>Hit the <B>go </B>button.
+</UL>
+
+<H3>To test with your own map:</H3>
+
+<UL>
+    <LI>Hit the <B>clear</B> button. (Some junk may be left on the screen for now but it really has been cleared!)
+    <LI>Select the <B>set start</B> option and choose a location on the grid. (it should turn green)
+    <LI>Select the <B>set finish </B>option and chose a location on the grid. (it should turn red)
+    <LI>Hit the <B>go </B>button.
+</UL>
+
+<H3>To set up obstacles/paths:</H3>
+
+<UL>
+    <LI>Select the <B>set blocks</B> option.
+    <LI>Choose a level for the blocks from the menu underneath
+        <UL>
+            <LI><B>Impossible</B> : No route can pass through this cell. (<I>might be water in a game</I>)
+            <LI><B>Very Tough</B> : Going through this cell is hard going (<I>might represent mountains in a game</I>)
+            <LI><B>Tough </B>: Going through this cell is quite hard (<I>might represent a hill or forest in a game</I>)
+            <LI><B>Easy</B> : Going through this cell is easier than a normal square (<I>might be a road in a game</I>)
+        </UL>
+    <LI>Click on the grid to set blocks (click on a block again to clear it)
+    <LI>Set the start and end points as above.
+    <LI>Hit the go button.
+</UL>
+
+<H3>To install on your own system</H3>
+<P><A HREF="astar.zip">astar.zip</A> contains all of the class and java files you need as well as some example
+    maps.<BR>
+    You can run AStarApplet.class both as an applet and as an application.<BR>
+    As an application you can save new maps.<BR>
+    <I>(right click on the above link and choose 'save link as' if Netscape gets confused)</I></P>
+<H3>To make me happy (or sad)</H3>
+<P>Send me some <A HREF="mailto:j.macgill@geog.leeds.ac.uk">feedback</A>.</P>
+<H2>About the A* algorithm</H2>
+<P><I>(A quick overview for now, I'll go into more depth later)</I></P>
+
+<P>The algorithm searches outwards from the start point adding up the cost of traversing each cell.<BR>
+    It stores the distance each cell is from the start point and moves on.<BR>
+    When it reaches the end point it searches back, looking for the cell with the shortest distance from the start
+    each step.</P>
+<H2>Notes:</H2>
+<P>The applet has been deliberately slowed down so that you can see what is going on.<BR>
+    There are now two methods available: <B>Clasic A*</B> which works properly and <B>Old</B> (my fist attempt) which
+    dosn't.<BR>
+    It always finds a route if one is possible (I think) <BR>
+    <B>Old </B>may appear to operate faster than <B>Clasic </B>but this is an artifact of the animation and not a reult
+    of the methods efficiency.</P>
+<H2>Improvements</H2>
+<P>Add additional path finder methods.<BR>
+    Add more predefined patterns.</P>
+
+<P>
+<HR ALIGN="CENTER">
+<BR>
+Last Updated January 18 1999.<BR>
+<A HREF="mailto://j.macgill@geog.leeds.ac.uk">James Macgill</A> - <A HREF="http://www.ccg.leeds.ac.uk">Center for
+    Computational Geography.</A><BR>
+<A HREF="http://www.geog.leeds.ac.uk/pgrads/j.macgill/gis.html">Home Page</A>
+
+</BODY>
+
+</HTML>
