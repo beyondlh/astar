@@ -42,13 +42,11 @@ public class HuristicAStar extends OneTailAStar implements PathFinder {
         double score;
         //int best = -1;
         GridCell best = (GridCell) temp.elementAt(temp.size() - 1);
-        ;
+
         GridCell now;
         for (int i = 0; i < temp.size(); i++) {
             now = (GridCell) temp.elementAt(i);
             if (!done.contains(now)) {
-                //score =now.getDistFromStart();
-
                 score = now.getDistFromStart();
                 score += cbDist(now.getPosition(), end, minCost);
                 if (score < min) {
@@ -57,10 +55,13 @@ public class HuristicAStar extends OneTailAStar implements PathFinder {
                 }
             }
         }
+//      从edge中得到下一个最优点
         now = best;
         //System.out.println(now.getPosition()+" Selected for expansion");
         edge.removeElement(now);
         done.addElement(now);
+
+        //从最优点中找到下一步查找的筛选点
         GridCell next[] = map.getAdjacent(now);
         for (int i = 0; i < 4; i++) {
             if (next[i] != null) {
@@ -88,6 +89,4 @@ public class HuristicAStar extends OneTailAStar implements PathFinder {
         //now process best.
         return NOT_FOUND;
     }
-
-
 }

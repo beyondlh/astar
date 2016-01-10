@@ -10,21 +10,16 @@ import java.util.Vector;
 public class GridCell extends Component implements Serializable {
     public static final int SET_BLOCKS = 0, SET_START = 1, SET_FINISH = 2;
     public static final double NORMAL = 1, EASY = 0.3, TOUGH = 5, VERY_TOUGH = 10, BLOCK = Double.MAX_VALUE;
+    public static boolean tidy = false;
     private static double newBlockStrength = BLOCK;
     private static int editMode = SET_BLOCKS;
     private static GridCell startCell;
     private static GridCell finishCell;
-
-    private boolean isStart = false;
-    private boolean isFinish = false;
-
     private static Vector cells = new Vector();
-
-    public static boolean tidy = false;
-
     private static boolean showPath = true;
     private static boolean showDist = true;
-
+    private boolean isStart = false;
+    private boolean isFinish = false;
     private double cost = 1.0;
     private transient boolean used = false;
     private transient double distFromStart = -1;
@@ -51,17 +46,53 @@ public class GridCell extends Component implements Serializable {
         setTotalBlock(block);
     }
 
-    public void setPosition(Point p) {
-        position = p;
+    public static void setEditMode(int mode) {
+        editMode = mode;
+        System.out.println("mode set");
+    }
+
+    public static GridCell getStartCell() {
+        return startCell;
+    }
+
+    public static GridCell getFinishCell() {
+        return finishCell;
+    }
+
+    public static void reset() {
+        for (int i = 0; i < cells.size(); i++) {
+            ((GridCell) cells.elementAt(i)).resetCell();
+        }
+    }
+
+    public static void clearAll() {
+        for (int i = 0; i < cells.size(); i++) {
+            ((GridCell) cells.elementAt(i)).clearCell();
+        }
+    }
+
+    public static void setNewBlockStrength(double s) {
+        if (s < 0) {
+            newBlockStrength = BLOCK;
+        } else {
+            newBlockStrength = s;
+        }
+    }
+
+    public static boolean isShowPath() {
+        return showPath;
+    }
+
+    public static void setShowPath(boolean flag) {
+        showPath = flag;
     }
 
     public Point getPosition() {
         return position;
     }
 
-    public static void setEditMode(int mode) {
-        editMode = mode;
-        System.out.println("mode set");
+    public void setPosition(Point p) {
+        position = p;
     }
 
     public void processMouseEvent(MouseEvent e) {
@@ -83,11 +114,8 @@ public class GridCell extends Component implements Serializable {
                 case (SET_FINISH):
                     setFinish(true);
                     break;
-
-
             }
         }
-
     }
 
     public Dimension getPreferredSize() {
@@ -96,7 +124,7 @@ public class GridCell extends Component implements Serializable {
 
     public void addToPathFromStart(double distSoFar) {
         used = true;
-
+//
         if (distFromStart == -1) {
             distFromStart = distSoFar + cost;
             return;
@@ -117,18 +145,12 @@ public class GridCell extends Component implements Serializable {
         }
     }
 
-
     public double getCost() {
         return cost;
     }
 
-
     public void setCost(double c) {
         cost = c;
-    }
-
-    public static GridCell getStartCell() {
-        return startCell;
     }
 
     public boolean isStart() {
@@ -149,11 +171,6 @@ public class GridCell extends Component implements Serializable {
         } else {
             isStart = false;
         }
-
-    }
-
-    public static GridCell getFinishCell() {
-        return finishCell;
     }
 
     public boolean isFinish() {
@@ -180,7 +197,6 @@ public class GridCell extends Component implements Serializable {
         return cost == BLOCK;
     }
 
-
     public void setTotalBlock(boolean flag) {
         if (flag) {
             cost = BLOCK;
@@ -199,37 +215,8 @@ public class GridCell extends Component implements Serializable {
         distFromStart = distFromFinish = -1;
     }
 
-    public static void reset() {
-        for (int i = 0; i < cells.size(); i++) {
-            ((GridCell) cells.elementAt(i)).resetCell();
-        }
-    }
-
     private void clearCell() {
         setCost(NORMAL);
-    }
-
-    public static void clearAll() {
-        for (int i = 0; i < cells.size(); i++) {
-            ((GridCell) cells.elementAt(i)).clearCell();
-        }
-    }
-
-
-    public static void setNewBlockStrength(double s) {
-        if (s < 0) {
-            newBlockStrength = BLOCK;
-        } else {
-            newBlockStrength = s;
-        }
-    }
-
-    public static void setShowPath(boolean flag) {
-        showPath = flag;
-    }
-
-    public static boolean isShowPath() {
-        return showPath;
     }
 
     public boolean isPartOfPath() {
@@ -240,7 +227,9 @@ public class GridCell extends Component implements Serializable {
         partOfPath = flag;
     }
 
-
+    /**
+     * 到起点的花费
+     * */
     public double getDistFromStart() {
         if (GridCell.startCell == this) {
             return 0;
@@ -304,9 +293,5 @@ public class GridCell extends Component implements Serializable {
         if (isFinish) {
             setFinish(true);
         }
-
-
     }
-
-
 }

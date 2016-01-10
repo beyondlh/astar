@@ -20,16 +20,16 @@ public class OneTailAStar extends Object implements PathFinder, Runnable {
         GridCell.reset();
         edge = new Vector();
         done = new Vector();
-        System.out.println("calculating route");
+        System.out.println("开始寻找路径");
         if (GridCell.getStartCell() == null) {
-            System.out.println("No start point set");
+            System.out.println("起点没有设置");
             return null;
         }
         if (GridCell.getFinishCell() == null) {
-            System.out.println("No finish point set");
+            System.out.println("终点没有设置");
             return null;
         }
-        System.out.println("Starting from " + map.getStartPosition());
+        System.out.println("起点坐标 " + map.getStartPosition());
         loop = new Thread(this);
         loop.start();
         return null;
@@ -50,12 +50,11 @@ public class OneTailAStar extends Object implements PathFinder, Runnable {
                 loop.sleep(Math.max((long) (stepSpeed - diff), 0));
             } catch (InterruptedException e) {
             }
-            // System.out.println(diff);
         }
         if (state == FOUND) {
             setPath(map);
         } else {
-            System.out.println("No Path Found");
+            System.out.println("没有找到合适路径");
         }
     }
 
@@ -65,6 +64,7 @@ public class OneTailAStar extends Object implements PathFinder, Runnable {
         boolean found = false;
         boolean growth = false;
         GridCell finish = GridCell.getFinishCell();
+//        最开始的时候edge中只有起点
         Vector temp = (Vector) edge.clone();
         for (int i = 0; i < temp.size(); i++) {
             GridCell now = (GridCell) temp.elementAt(i);
@@ -118,9 +118,7 @@ public class OneTailAStar extends Object implements PathFinder, Runnable {
             } catch (InterruptedException e) {
             }
         }
-        System.out.println("Done");
-
-
+        System.out.println("完成");
     }
 
 }

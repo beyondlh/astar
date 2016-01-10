@@ -49,7 +49,7 @@ public class LHMap extends Panel implements Serializable {
 
     /**
      * 获取临近的四个GridCell
-     * */
+     */
     public GridCell[] getAdjacent(GridCell g) {
         GridCell next[] = new GridCell[4];
         Point p = g.getPosition();
@@ -70,7 +70,7 @@ public class LHMap extends Panel implements Serializable {
 
     /**
      * 获取临近最优GridCell
-     * */
+     */
     public GridCell getLowestAdjacent(GridCell g) {
         GridCell next[] = getAdjacent(g);
         GridCell small = next[0];
@@ -92,9 +92,4 @@ public class LHMap extends Panel implements Serializable {
         ois.defaultReadObject();
         GridCell.setShowPath(false);
     }
-    //{{REGISTER_LISTENERS
-    //};
-    //{{DECLARE_CONTROLS
-    //}}
-
 }
